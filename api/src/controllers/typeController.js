@@ -4,8 +4,6 @@ require("dotenv").config();
 const { URL_API_TYPES } = process.env;
 
 const getTypesController = async () => {
-
-  
   const typeDB = await Type.findAll();
 
   if (typeDB.length) {

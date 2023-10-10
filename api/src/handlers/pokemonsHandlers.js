@@ -20,6 +20,7 @@ const getPokemonByNameHandler = async (req, res) => {
       const response = await getPokemonByName(lowercaseName);
       return res.status(200).json(response);
     }
+    // al no recibir nada por query, devuelve todos los pokemons
     const response = await getAllPokemons();
 
     res.status(200).json(response);

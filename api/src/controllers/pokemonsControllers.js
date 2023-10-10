@@ -2,20 +2,21 @@ const axios = require("axios");
 const { Pokemon, Type } = require("../db");
 require("dotenv").config();
 const { URL_API } = process.env;
-const { v4: uuidv4, validate: validateUuid } = require('uuid');
+const { validate: validateUuid } = require("uuid");
 const { cleanPokemon } = require("../utils/index");
 
 const getPokemonsApi = async () => {
   try {
-    const pokemonsInfoApi = await axios.get(`${URL_API}`);
-    const fetchPokemonDetails = pokemonsInfoApi.data.results.map((pokemon) => axios.get(pokemon.url));
-    const pokemonApiResponses = await axios.all(fetchPokemonDetails);
-    const pokemonApiUrls = pokemonApiResponses.map((obj) => obj.data);
-    const cleanedPokemonData = pokemonApiUrls.map((pokemon) => cleanPokemon(pokemon));
+    const pokemonsInfoApi = await axios.get(`${URL_API}/?limit=1292`);
+    const pokemonUrls = pokemonsInfoApi.data.results.map((pokemon) => pokemon.url);
+
+    const pokemonApiResponses = await Promise.all(pokemonUrls.map((url) => axios.get(url)));
+
+    const cleanedPokemonData = pokemonApiResponses.map((response) => cleanPokemon(response.data));
 
     return cleanedPokemonData;
   } catch (error) {
-    throw new Error("Error al obtener datos de la API: " + error.message);
+    throw new Error(`Error al obtener datos de la API: ${error.message}`);
   }
 };
 
@@ -33,7 +34,7 @@ const getPokemonsDB = async () => {
 
     return pokemonsDB;
   } catch (error) {
-    throw new Error("Error al obtener datos de la base de datos: " + error.message);
+    throw new Error(`Error al obtener datos de la base de datos: ${error.message}`);
   }
 };
 
@@ -42,7 +43,7 @@ const getAllPokemons = async () => {
     const [pokemonApiData, pokemonDBData] = await Promise.all([getPokemonsApi(), getPokemonsDB()]);
     return [...pokemonApiData, ...pokemonDBData];
   } catch (error) {
-    throw new Error("Error al obtener todos los Pokémon: " + error.message);
+    throw new Error(`Error al obtener todos los Pokémon: ${error.message}`);
   }
 };
 
@@ -50,7 +51,7 @@ const getPokemonById = async (id) => {
   try {
     let response;
 
-    // Si el ID es un UUID buscamos en la base de datos
+    // Si el ID es un UUID, buscamos en la base de datos
     if (validateUuid(id)) {
       response = await Pokemon.findOne({
         where: { id },
@@ -64,8 +65,14 @@ const getPokemonById = async (id) => {
       });
     } else {
       // Si no es un UUID válido, buscamos en la API
-      const res = (await axios.get(`${URL_API}/${id}`)).data;
-      response = cleanPokemon(res);
+      const apiResponse = await axios.get(`${URL_API}/${id}`);
+      const pokemonData = apiResponse.data;
+
+      if (!pokemonData) {
+        throw new Error(`El Pokémon con ID '${id}' no se encontró en la API.`);
+      }
+
+      response = cleanPokemon(pokemonData);
     }
 
     if (!response) {
@@ -74,39 +81,43 @@ const getPokemonById = async (id) => {
 
     return response;
   } catch (error) {
-    throw new Error("Error al obtener el Pokémon por ID: " + error.message);
+    throw new Error(`Error al obtener el Pokémon por ID '${id}': ${error.message}`);
   }
 };
 
 const getPokemonByName = async (name) => {
   try {
-    const infoApi = (await axios.get(`${URL_API}/${name}`)).data;
+    // Primero, busca en la base de datos
+    const pokemonDB = await Pokemon.findOne({
+      where: { name },
+      include: {
+        attributes: ["name"],
+        model: Type,
+        through: {
+          attributes: [],
+        },
+      },
+    });
 
-    if (infoApi) {
+    if (pokemonDB) {
+      console.log("Traído de la base de datos");
+      return pokemonDB;
+    }
+
+    // Si no se encuentra en la base de datos, busca en la API
+    const apiResponse = await axios.get(`${URL_API}/${name}`);
+    const pokemonData = apiResponse.data;
+
+    if (pokemonData) {
       console.log("Traído de la API");
-      const pokemonApi = cleanPokemon(infoApi);
+      const pokemonApi = cleanPokemon(pokemonData);
       return pokemonApi;
     }
+
+    // Si no se encuentra en la API, lanza una excepción
+    throw new Error(`El Pokémon '${name}' no se encontró en la base de datos ni en la API.`);
   } catch (error) {
-    if (error.response && error.response.status === 404) {
-      // Si la API devuelve un error 404, busca en la base de datos
-      const pokemonDB = await Pokemon.findOne({
-        where: { name },
-        include: {
-          attributes: ["name"],
-          model: Type,
-          through: {
-            attributes: [],
-          },
-        },
-      });
-      if (pokemonDB) {
-        console.log("Traído de la base de datos");
-        return pokemonDB;
-      }
-    }
-    // Si hay otro tipo de error, lanza una excepción
-    throw new Error(`El Pokémon '${name}' no se encontró. ` + error.message);
+    throw new Error(`Error al obtener el Pokémon '${name}': ${error.message}`);
   }
 };
 

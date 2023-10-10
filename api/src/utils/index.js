@@ -4,7 +4,6 @@
 const { Pokemon, Type } = require("../db");
 
 const cleanPokemon = (pokemon) => {
-  // const objPokeApi = {
   return {
     id: pokemon.id,
     name: pokemon.forms[0].name,
@@ -24,7 +23,6 @@ const cleanPokemon = (pokemon) => {
     }),
     created: false,
   };
-  return objPokeApi;
 };
 
 module.exports = { cleanPokemon };

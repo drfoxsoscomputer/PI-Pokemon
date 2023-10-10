@@ -7,13 +7,9 @@ const createPokemon = async (name, image, hp, attack, defense, speed, height, we
     }
 
     const typeNames = Array.isArray(types) ? types : [types];
-    const typeRecords = await Promise.all(typeNames.map(async (typeName) => {
-      let typeRecord = await Type.findOne({ where: { name: typeName } });
-      if (!typeRecord) {
-        typeRecord = await Type.create({ name: typeName });
-      }
-      return typeRecord;
-    }));
+
+    // Busca los tipos en la base de datos
+    const typeRecords = await Type.findAll({ where: { name: typeNames } });
 
     const createdPokemon = await Pokemon.create({
       name,
@@ -27,15 +23,20 @@ const createPokemon = async (name, image, hp, attack, defense, speed, height, we
       created,
     });
 
+    // Asocia los tipos al Pokémon creado
     await createdPokemon.addType(typeRecords);
-    const typeNameArray = typeRecords.map((type) => type.name);
-    createdPokemon.types = typeNameArray;
+
+    // Devuelve el Pokémon creado con sus tipos
+    createdPokemon.types = typeRecords.map((type) => type.name);
 
     return createdPokemon;
   } catch (error) {
     throw new Error("Error al crear el Pokémon: " + error.message);
   }
 };
+
+module.exports = createPokemon;
+
 
 
 // const createPokemon = async (name, image, hp, attack, defense, speed, height, weight, types, created) => {
@@ -69,4 +70,4 @@ const createPokemon = async (name, image, hp, attack, defense, speed, height, we
 //   }
 // };
 
-module.exports = createPokemon;
+// module.exports = createPokemon;
