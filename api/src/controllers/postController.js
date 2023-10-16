@@ -31,7 +31,7 @@ const createPokemon = async (name, image, hp, attack, defense, speed, height, we
 
     return createdPokemon;
   } catch (error) {
-    throw new Error("Error al crear el Pokémon: " + error.message);
+    throw new Error({ error: error.message });
   }
 };
 

@@ -7,7 +7,8 @@ const cleanPokemon = (pokemon) => {
   return {
     id: pokemon.id,
     name: pokemon.forms[0].name,
-    image: pokemon.sprites.other["dream_world"].front_default, //649 pokemons svg
+    image: pokemon.sprites.other["dream_world"].front_default || pokemon.sprites.other["home"].front_default || pokemon.sprites.other["official-artwork"].front_default,
+    // image: pokemon.sprites.other["dream_world"].front_default, //649 pokemons svg
     // image: pokemon.sprites.other["home"].front_default, // 906 Pokemons
     // image: pokemon.sprites.other["official-artwork"].front_default, // 1017 pokemons
     hp: pokemon.stats[0].base_stat,

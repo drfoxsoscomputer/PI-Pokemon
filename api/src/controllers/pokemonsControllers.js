@@ -7,7 +7,9 @@ const { cleanPokemon } = require("../utils/index");
 
 const getPokemonsApi = async () => {
   try {
-    const pokemonsInfoApi = await axios.get(`${URL_API}/?limit=1292`);
+    // const pokemonsInfoApi = await axios.get(`${URL_API}`);
+    const pokemonsInfoApi = await axios.get(`${URL_API}/?limit=500`);
+    // const pokemonsInfoApi = await axios.get(`${URL_API}/?limit=2000`);
     const pokemonUrls = pokemonsInfoApi.data.results.map((pokemon) => pokemon.url);
 
     const pokemonApiResponses = await Promise.all(pokemonUrls.map((url) => axios.get(url)));
@@ -43,7 +45,7 @@ const getAllPokemons = async () => {
     const [pokemonApiData, pokemonDBData] = await Promise.all([getPokemonsApi(), getPokemonsDB()]);
     return [...pokemonApiData, ...pokemonDBData];
   } catch (error) {
-    throw new Error(`Error al obtener todos los Pokémon: ${error.message}`);
+    throw new Error({ error: error.message });
   }
 };
 
@@ -66,13 +68,13 @@ const getPokemonById = async (id) => {
     } else {
       // Si no es un UUID válido, buscamos en la API
       const apiResponse = await axios.get(`${URL_API}/${id}`);
-      const pokemonData = apiResponse.data;
+      const pokemonDataApi = apiResponse.data;
 
-      if (!pokemonData) {
+      if (!pokemonDataApi) {
         throw new Error(`El Pokémon con ID '${id}' no se encontró en la API.`);
       }
 
-      response = cleanPokemon(pokemonData);
+      response = cleanPokemon(pokemonDataApi);
     }
 
     if (!response) {
@@ -81,7 +83,7 @@ const getPokemonById = async (id) => {
 
     return response;
   } catch (error) {
-    throw new Error(`Error al obtener el Pokémon por ID '${id}': ${error.message}`);
+    throw new Error({ error: error.message });
   }
 };
 
