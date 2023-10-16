@@ -1,0 +1,26 @@
+/* Search.Styles.css */
+.search-container {
+    display: flex;
+    /* align-items: center; */
+  }
+  
+  .input-search {
+    width: 200px;
+    height: 20px;
+    padding: 1px 10px;
+    border: 1px solid #ccc;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+  
+  .search-button {
+    height: 25px;
+    background-color: #007bff;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-top-right-radius: 8px; 
+    border-bottom-right-radius: 8px; 
+    cursor: pointer;
+  }
+  

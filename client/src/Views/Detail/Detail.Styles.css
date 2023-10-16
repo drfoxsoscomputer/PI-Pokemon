@@ -1,0 +1,51 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .cardDetail {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 50px;
+    border-radius: 5px;
+  }
+  
+  .cardAbout {
+    display: flex;
+  }
+  
+  .img {
+    max-width: 250px;
+    max-height: 250px;
+    margin-right: 10px;
+  }
+  
+  .aboutPokemon {
+    flex: 1;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin: 0 0 10px;
+  }
+  
+  .data {
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  
+  .data p {
+    margin: 5px 0;
+  }
+  
+  span {
+    font-weight: 600;
+  }
+  
+  p {
+    margin: 5px 0;
+  }
+  
