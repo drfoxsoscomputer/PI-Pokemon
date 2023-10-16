@@ -70,7 +70,7 @@
 <br />
 
 <div align="center" >
-<img src="./commentsExample.png" alt="" />
+<img src="./1commentsExample.png" alt="" />
 </div>
 
 <br />
