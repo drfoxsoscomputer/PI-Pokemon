@@ -1,21 +1,22 @@
 .card-container {
     
-    width: 16em;
+    width: 16rem;
+    /* height: fit-content; */
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 
     padding: 0.5em;
-    margin: 1em;
+    margin: 0.5em;
     background-color: transparent;
     border: 1px solid grey;
     border-radius: 5px;
-    padding: 25px;
+    /* padding: 0px; */
     cursor: pointer;
-    -moz-osx-font-smoothing:grayscale;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-    transition: transform 2s ease-out;
+    /* -moz-osx-font-smoothing:grayscale; */
+    /* backface-visibility: hidden; */
+    /* transform: translateZ(0); */
+    /* transition: transform 2s ease-out; */
 }
 
 .img:hover{

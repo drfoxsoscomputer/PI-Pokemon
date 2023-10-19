@@ -1,4 +1,3 @@
-import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { setIndexPage } from "../../Redux/actions";
@@ -8,6 +7,7 @@ const Pagination = () => {
   const dispatch = useDispatch();
   const indexPage = useSelector((state) => state.indexPage);
   const quantityPages = useSelector((state) => state.quantityPages);
+  // const updatedShowPokemons = useSelector((state) => state.updatedShowPokemons);
 
   const handlePageChange = (event) => {
     let direction = event.target.value;
@@ -17,7 +17,8 @@ const Pagination = () => {
 
   const renderPageNumbers = () => {
     const pageNumbers = [];
-    const maxPageNumbers = 3;
+    let maxPageNumbers = 3;
+
     const startPage = Math.min(Math.max(1, indexPage - Math.floor(maxPageNumbers / 2)), quantityPages - maxPageNumbers + 1);
 
     for (let i = startPage; i < startPage + maxPageNumbers; i++) {
@@ -30,6 +31,7 @@ const Pagination = () => {
         </button>
       );
     }
+
     return pageNumbers;
   };
 

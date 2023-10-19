@@ -8,7 +8,7 @@ const { cleanPokemon } = require("../utils/index");
 const getPokemonsApi = async () => {
   try {
     // const pokemonsInfoApi = await axios.get(`${URL_API}`);
-    const pokemonsInfoApi = await axios.get(`${URL_API}/?limit=500`);
+    const pokemonsInfoApi = await axios.get(`${URL_API}/?limit=100`);
     // const pokemonsInfoApi = await axios.get(`${URL_API}/?limit=2000`);
     const pokemonUrls = pokemonsInfoApi.data.results.map((pokemon) => pokemon.url);
 

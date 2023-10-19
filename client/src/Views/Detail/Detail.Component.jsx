@@ -1,83 +1,67 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
+import { clearDetails, getDetails } from "../../Redux/actions";
 import "./Detail.Styles.css";
+import Loading from "../../Components/Loading/Loading.Component";
 
 const Detail = () => {
+  const dispatch = useDispatch();
   const { id } = useParams();
-  const [pokemon, setPokemon] = useState({});
+  const pokemonDetail = useSelector((state) => state.details);
 
   useEffect(() => {
-    const pokemonDetail = async () => {
-      try {
-        const response = await axios.get(`http://localhost:3001/pokemons/${id}`);
-        const data = response.data;
-        console.log(data);
-        if (data.name) {
-          const types = data.types.map((typeData) => typeData.PokemonType || typeData);
-          console.log(types);
-          setPokemon({ ...data, types });
-        } else {
-          throw new Error("No se encontró el Pokemon con ese Id");
-        }
-      } catch (error) {
-        alert(error);
-      }
-    };
-    pokemonDetail();
-
+    dispatch(getDetails(id));
     return () => {
-      setPokemon({});
+      dispatch(clearDetails());
     };
-  }, [id]);
+  }, [dispatch, id]);
 
   return (
     <div className="container">
-      {pokemon.name ? (
+      {pokemonDetail.name ? (
         <div className="cardDetail">
-          
           <div className="cardAbout">
-            {pokemon.image && (
+            {pokemonDetail.image && (
               <img
-                src={pokemon.image}
-                alt={pokemon.name}
+                src={pokemonDetail.image}
+                alt={pokemonDetail.name}
                 className="img"
               />
             )}
             <div className="aboutPokemon">
-              <h2>{pokemon.name.toUpperCase()}</h2>
+              <h2>{pokemonDetail.name.toUpperCase()}</h2>
               <div className="data">
                 <p>
                   <span>ID: </span>
-                  {pokemon.id}
+                  {pokemonDetail.id}
                 </p>
                 <p>
                   <span>HP: </span>
-                  {pokemon.hp}
+                  {pokemonDetail.hp}
                 </p>
                 <p>
                   <span>Attack: </span>
-                  {pokemon.attack}
+                  {pokemonDetail.attack}
                 </p>
                 <p>
-                  <span>Defense:</span> {pokemon.defense}
+                  <span>Defense:</span> {pokemonDetail.defense}
                 </p>
                 <p>
-                  <span>Speed:</span> {pokemon.speed}
+                  <span>Speed:</span> {pokemonDetail.speed}
                 </p>
                 <p>
-                  <span>Height:</span> {pokemon.height}
+                  <span>Height:</span> {pokemonDetail.height}
                 </p>
                 <p>
-                  <span>Weight:</span> {pokemon.weight}
+                  <span>Weight:</span> {pokemonDetail.weight}
                 </p>
                 <div>
-                  {pokemon?.types.map((type, index) => (
+                  {pokemonDetail?.types.map((type, index) => (
                     <span key={index}>
                       {type.name.toUpperCase()}
-                      {index < pokemon.types.length - 1 ? " " : ""}
+                      {index < pokemonDetail.types.length - 1 ? " " : ""}
                     </span>
                   ))}
                 </div>
@@ -87,7 +71,7 @@ const Detail = () => {
           <Link to="/home">Back</Link>
         </div>
       ) : (
-        <p>Loading...</p>
+        <Loading />
       )}
     </div>
   );

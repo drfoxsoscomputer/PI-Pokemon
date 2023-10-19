@@ -1,20 +1,15 @@
+import { NavLink } from "react-router-dom";
+
 import "./NavBar.Styles.css";
 
-const NavBar = ({ handleChange, handleSubmit }) => {
+const NavBar = () => {
   return (
-    <div className="search-box">
-      <form onChange={handleChange}>
-        <input
-          type="search"
-          placeholder="Buscar por Id o Nombre"
-        />
-        <button
-          type="submit"
-          onClick={handleSubmit}>
-          Buscar
-        </button>
-      </form>
-    </div>
+    <nav className="navContainer">
+      <NavLink to="/">Inicio</NavLink>
+      <NavLink to="/home">Home</NavLink>
+      <NavLink to="/create">Crear Pokemon</NavLink>
+      
+    </nav>
   );
 };
 

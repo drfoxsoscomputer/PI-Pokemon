@@ -17,13 +17,13 @@ const app = require("./src/app");
 const { conn } = require("./src/db");
 require("dotenv").config();
 const { PORT } = process.env;
-const getTypesController = require("./src/controllers/typeController");
+// const getTypesController = require("./src/controllers/typeController");
 
 // Syncing all the models at once.
 conn
   .sync({ force: true }) // cambiar a false al terminar
   .then(() => {
-    getTypesController();
+    // getTypesController();
     app.listen(PORT, () => {
       console.log(`✔ Server is listening on port: ${PORT} 👍`); // eslint-disable-line no-console
     });

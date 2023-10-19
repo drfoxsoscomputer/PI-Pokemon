@@ -8,14 +8,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
   }
-  
-  .home-title {
-    margin-top: 20px;
-    margin-bottom: 30px;
-    font-size: 1em;
-    color: black;
-    font-family: "Bigelow Rules";
-  }
+
   
   .home {
     display: flex;
@@ -23,8 +16,8 @@ body {
     align-items: center;
   }
   
-  /* code {
+  code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
-  } */
+  }
   

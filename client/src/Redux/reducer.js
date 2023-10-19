@@ -1,12 +1,10 @@
-import { GET_POKEMONS, SET_INDEX_PAGE, SET_SOURCE, GET_POKEMON_BY_NAME_OR_ID } from "./actions";
+import { GET_POKEMONS, GET_TYPES, SET_INDEX_PAGE, POST_POKEMON, GET_POKEMON_BY_NAME_OR_ID, GET_DETAILS, CLEAR_DETAILS } from "./actions-types";
 
 const initialState = {
-  source: "API",
-  pokemons: [],
-  // searchedPokemon: [],
-  // filteredPokemons: [],
-  originalPokemons: [],
+  allPokemons: [],
   updatedShowPokemons: [],
+  types: [],
+  details: [],
   //paginado
   indexPage: 1,
   quantityPokemons: 12,
@@ -14,8 +12,7 @@ const initialState = {
   indexLastPokemon: 12,
   quantityPages: 1,
   prevIndexPage: 1,
-  // buscar por nombre
-  // searchedPokemon: [],
+
 };
 
 const reducer = (state = initialState, action) => {
@@ -23,17 +20,22 @@ const reducer = (state = initialState, action) => {
     case GET_POKEMONS:
       return {
         ...state,
-        pokemons: action.payload,
-        originalPokemons: action.payload,
+        allPokemons: action.payload,
+        // originalPokemons: action.payload,
         updatedShowPokemons: action.payload.slice(state.indexFirstPokemon, state.indexLastPokemon),
         quantityPages: Math.ceil(action.payload.length / state.quantityPokemons),
+      };
+
+    case POST_POKEMON:
+      return {
+        ...state,
       };
 
     case SET_INDEX_PAGE: {
       let index = action.payload || state.indexPage;
       let first = (index - 1) * state.quantityPokemons;
       let last = index * state.quantityPokemons;
-      let update = state.pokemons.slice(first, last);
+      let update = state.allPokemons.slice(first, last);
       return {
         ...state,
         indexPage: index,
@@ -50,19 +52,23 @@ const reducer = (state = initialState, action) => {
         updatedShowPokemons: [action.payload],
       };
 
-    case SET_SOURCE: {
-      const source = action.payload;
-
-      const updatedShowPokemons = state.originalPokemons.filter((pokemon) => {
-        return source === "" || pokemon.source === source;
-      });
-
+    case GET_DETAILS:
       return {
         ...state,
-        source,
-        updatedShowPokemons,
+        details: action.payload,
       };
-    }
+
+    case CLEAR_DETAILS:
+      return {
+        ...state,
+        details: [],
+      };
+
+    case GET_TYPES:
+      return {
+        ...state,
+        types: action.payload,
+      };
 
     default:
       return { ...state };
