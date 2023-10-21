@@ -14,13 +14,13 @@ const Detail = () => {
   useEffect(() => {
     dispatch(getDetails(id));
     return () => {
-      dispatch(clearDetails());
+      dispatch(clearDetails(id));
     };
-  }, [dispatch, id]);
+  }, [dispatch]);
 
   return (
     <div className="container">
-      {pokemonDetail.name ? (
+      {pokemonDetail?.name ? (
         <div className="cardDetail">
           <div className="cardAbout">
             {pokemonDetail.image && (
@@ -68,7 +68,9 @@ const Detail = () => {
               </div>
             </div>
           </div>
+          <br />
           <Link to="/home">Back</Link>
+          <br />
         </div>
       ) : (
         <Loading />

@@ -1,71 +1,72 @@
 import { useSelector, useDispatch } from "react-redux";
-
-import { setIndexPage } from "../../Redux/actions";
+import { setCurrentPage } from "../../Redux/actions";
 import "./Pagination.Styles.css";
 
 const Pagination = () => {
   const dispatch = useDispatch();
-  const indexPage = useSelector((state) => state.indexPage);
-  const quantityPages = useSelector((state) => state.quantityPages);
-  // const updatedShowPokemons = useSelector((state) => state.updatedShowPokemons);
+  const { currentPage, totalPages } = useSelector((state) => state);
+  const pageNumbers = [];
 
-  const handlePageChange = (event) => {
-    let direction = event.target.value;
-    let index = direction === "+" ? indexPage - 1 : indexPage + 1;
-    dispatch(setIndexPage(index));
+  for (let i = 1; i <= totalPages; i++) pageNumbers.push(i);
+
+  const startHandler = () => {
+    dispatch(setCurrentPage(1));
   };
 
-  const renderPageNumbers = () => {
-    const pageNumbers = [];
-    let maxPageNumbers = 3;
+  const previousHandler = () => {
+    dispatch(setCurrentPage(currentPage - 1));
+  };
 
-    const startPage = Math.min(Math.max(1, indexPage - Math.floor(maxPageNumbers / 2)), quantityPages - maxPageNumbers + 1);
+  const goTohandler = (page) => {
+    dispatch(setCurrentPage(page));
+  };
 
-    for (let i = startPage; i < startPage + maxPageNumbers; i++) {
-      pageNumbers.push(
-        <button
-          key={i}
-          onClick={() => dispatch(setIndexPage(i))}
-          className={indexPage === i ? "pagination-button active" : "pagination-button"}>
-          {i}
-        </button>
-      );
-    }
+  const nextHandler = () => {
+    dispatch(setCurrentPage(currentPage + 1));
+  };
 
-    return pageNumbers;
+  const endHandler = () => {
+    dispatch(setCurrentPage(totalPages));
   };
 
   return (
     <div className="pagination-container">
       <div>
         <button
-          className="first-button pagination-button"
-          onClick={() => dispatch(setIndexPage(1))}
-          disabled={indexPage === 1}>
-          First
-        </button>
-        <button
-          className="pagination-button"
-          onClick={handlePageChange}
-          value={"+"}
-          disabled={indexPage === 1}>
-          Previous
-        </button>
-
-        {renderPageNumbers()}
-        <button
-          className="pagination-button"
-          onClick={handlePageChange}
-          value={"-"}
-          disabled={indexPage === quantityPages}>
-          Next
+          className={`first-button pagination-button ${currentPage === 1 ? "active" : ""}`}
+          onClick={startHandler}
+          disabled={currentPage <= 1}>
+          <span>First</span>
         </button>
 
         <button
-          className="last-button pagination-button"
-          onClick={() => dispatch(setIndexPage(quantityPages))}
-          disabled={indexPage === quantityPages}>
-          Last
+          className="pagination-button"
+          onClick={previousHandler}
+          disabled={currentPage <= 1}>
+          <span>Previous</span>
+        </button>
+
+        {pageNumbers.map((pageNumber) => (
+          <button
+            key={pageNumber}
+            className={`pagination-button ${currentPage === pageNumber ? "active" : ""}`}
+            onClick={() => goTohandler(pageNumber)}>
+            {pageNumber}
+          </button>
+        ))}
+
+        <button
+          className="pagination-button"
+          onClick={nextHandler}
+          disabled={currentPage === totalPages}>
+          <span>Next</span>
+        </button>
+
+        <button
+          className={`last-button pagination-button ${currentPage === totalPages ? "active" : ""}`}
+          onClick={endHandler}
+          disabled={currentPage === totalPages}>
+          <span>Last</span>
         </button>
       </div>
     </div>

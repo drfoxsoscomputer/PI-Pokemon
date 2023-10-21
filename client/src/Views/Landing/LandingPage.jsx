@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 
 import { getPokemons, getTypes } from "../../Redux/actions";
 
+import "./LandingPage.Styles.css";
+
 const LandingPage = () => {
   const dispatch = useDispatch();
 
@@ -13,9 +15,11 @@ const LandingPage = () => {
   }, [dispatch]);
 
   return (
-    <Link to="/home">
-      <button className="button">Enter</button>
-    </Link>
+    <div className="rectangle-41">
+      <Link to="/home">
+        <button className="button">Enter</button>
+      </Link>
+    </div>
   );
 };
 

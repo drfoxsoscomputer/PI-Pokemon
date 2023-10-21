@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { getPokemonByNameOrId } from "../../Redux/actions";
+import { searchPokemons} from "../../Redux/actions";
 import "./Search.Styles.css";
 
 const Search = () => {
@@ -15,10 +15,14 @@ const Search = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (nameOrId.trim() !== "") {
-      dispatch(getPokemonByNameOrId(nameOrId));
+      dispatch(searchPokemons(nameOrId));
       setNameOrId("");
     }
   };
+  // const onClickClearHandler = () => {
+  //   setNameOrId("");
+  //   dispatch(getPokemons());
+  // };
 
   return (
     <div className="search-container">
@@ -35,6 +39,12 @@ const Search = () => {
           className="search-button">
           Search
         </button>
+
+        {/* <button
+          className="reset-button"
+          onClick={onClickClearHandler}>
+          Refresh
+        </button> */}
       </form>
     </div>
   );

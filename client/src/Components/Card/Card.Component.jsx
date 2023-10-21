@@ -7,7 +7,7 @@ const Card = (pokemons) => {
   return (
     <div className="card-container">
       <p># {id}</p>
-      <h2>{name.toUpperCase()}</h2>
+      <h2>{name?.toUpperCase()}</h2>
 
       <Link to={`/home/${id}`}>
         <img
@@ -18,7 +18,7 @@ const Card = (pokemons) => {
       </Link>
 
       <div>
-        {types.map((type, index) => (
+        {types?.map((type, index) => (
           <span key={index}>
             {type.name.toUpperCase()}
             {index < types.length - 1 ? " " : ""}

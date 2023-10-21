@@ -1,0 +1,23 @@
+
+.label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  /* .label p {
+    font-weight: bold;
+  } */
+  
+  .select {
+    padding: 5px;
+    /* font-size: 14px; */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .select option {
+    text-transform: uppercase;
+  }
+
+  
+  

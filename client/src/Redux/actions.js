@@ -1,19 +1,21 @@
 import axios from "axios";
 
-import { GET_POKEMONS, GET_TYPES, SET_INDEX_PAGE, POST_POKEMON, GET_POKEMON_BY_NAME_OR_ID, GET_DETAILS, CLEAR_DETAILS } from "./actions-types";
+export const GET_POKEMONS = "FETCH_POKEMONS";
+export const GET_TYPES = "FETCH_TYPES";
+export const SEARCH_POKEMONS = "SEARCH_POKEMONS";
+export const ORDER_POKEMONS_BY_NAME = "ORDER_POKEMONS";
+export const FILTER_POKEMONS_BY_SOURCE = "FILTER_POKEMONS_BY_SOURCE";
+export const FILTER_POKEMONS_BY_TYPES = "FILTER_POKEMONS_BY_TYPES";
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+export const CREATE_POKEMON = "CREATE_POKEMON";
+export const GET_DETAILS = "GET_DETAILS";
+export const CLEAR_DETAILS = "CLEAR_DETAILS";
+export const POST_POKEMON = "POST_POKEMON";
+export const RESET_FILTERS = "RESET_FILTERS";
 
 const URL = "http://localhost:3001";
 
-export const getPokemons = () => {
-  return async function (dispatch) {
-    const apiData = await axios.get(`${URL}/pokemons`);
-    const allPokemons = apiData.data;
-
-    dispatch({ type: GET_POKEMONS, payload: allPokemons });
-  };
-};
-
-export function getTypes() {
+export const getTypes = () => {
   return async function (dispatch) {
     const types = await axios.get(`${URL}/type`);
 
@@ -22,9 +24,71 @@ export function getTypes() {
       payload: types.data,
     });
   };
-}
+};
 
-export function postPokemon(payload) {
+export const getPokemons = () => {
+  return async (dispatch) => {
+    try {
+      const fetchedPokemons = (await axios(`${URL}/pokemons`)).data;
+      return dispatch({ type: GET_POKEMONS, payload: fetchedPokemons });
+    } catch (error) {
+      // console.log(error.message);
+    }
+  };
+};
+
+export const searchPokemons = (nameOrId) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`${URL}/pokemons/?name=${nameOrId}`);
+      const pokemon = response.data;
+      dispatch({
+        type: SEARCH_POKEMONS,
+        payload: pokemon,
+      });
+    } catch (error) {
+      alert(`El pokemon ${nameOrId} no existe`);
+    }
+  };
+};
+
+export const getPokemonsFilterByTypes = (filterTypes) => {
+  return (dispatch) => {
+    dispatch({
+      type: FILTER_POKEMONS_BY_TYPES,
+      payload: filterTypes,
+    });
+  };
+};
+
+export const orderPokemonsByName = (ordered) => {
+  return (dispatch) => {
+    dispatch({
+      type: ORDER_POKEMONS_BY_NAME,
+      payload: ordered,
+    });
+  };
+};
+
+export const filterPokemonsBySource = (source) => {
+  return (dispatch) => {
+    dispatch({
+      type: FILTER_POKEMONS_BY_SOURCE,
+      payload: source,
+    });
+  };
+};
+
+export const setCurrentPage = (page) => {
+  return (dispatch) => {
+    dispatch({
+      type: SET_CURRENT_PAGE,
+      payload: page,
+    });
+  };
+};
+
+export const createPokemon = (payload) => {
   return async function (dispatch) {
     try {
       await axios.post(`${URL}/pokemons`, payload);
@@ -32,29 +96,7 @@ export function postPokemon(payload) {
         type: POST_POKEMON,
       });
     } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
-export const setIndexPage = (index) => {
-  return {
-    type: SET_INDEX_PAGE,
-    payload: index,
-  };
-};
-
-export const getPokemonByNameOrId = (nameOrId) => {
-  return async function (dispatch) {
-    try {
-      const response = await axios.get(`${URL}/pokemons/?name=${nameOrId}`);
-      const pokemon = response.data;
-      dispatch({
-        type: GET_POKEMON_BY_NAME_OR_ID,
-        payload: pokemon,
-      });
-    } catch (error) {
-      alert(`El pokemon ${nameOrId} no existe`);
+      // console.log(error);
     }
   };
 };
@@ -69,7 +111,7 @@ export const getDetails = (id) => {
         payload: pokemon,
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 };
@@ -79,3 +121,9 @@ export const clearDetails = () => {
     type: CLEAR_DETAILS,
   };
 };
+
+export const resetFilters = () => {
+  return {
+    type: RESET_FILTERS,
+  }
+}

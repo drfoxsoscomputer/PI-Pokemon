@@ -28,7 +28,9 @@
     .active {
         background-color: #007bff;
         color: #fff;
-        font-weight: bold;
+        padding: 5px 10px;
+    border: 1px solid #ccc;
+        /* font-weight: bold; */
       /* box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff; */
       /* background-color: rgba(255, 255, 255, 0.5); */
       /* color: black; */
@@ -38,7 +40,9 @@
     }
   
     .navLink:hover {
-      box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff;
+      background-color: #007bff;
+      color: #fff;
+      /* box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff; */
     }
   
     .navLink:focus  
@@ -78,13 +82,3 @@
       }
     }
     
-    
-    
-    /* background-color: #00ffff;
-    background-color: #ff4081; */
-    
-    /* .divider {
-      margin: 10px 0;
-      border: none;
-      border-top: 1px solid #ccc;
-    } */

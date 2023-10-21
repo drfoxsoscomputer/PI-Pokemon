@@ -1,73 +1,136 @@
-import { GET_POKEMONS, GET_TYPES, SET_INDEX_PAGE, POST_POKEMON, GET_POKEMON_BY_NAME_OR_ID, GET_DETAILS, CLEAR_DETAILS } from "./actions-types";
+import {
+  ORDER_POKEMONS_BY_NAME,
+  FILTER_POKEMONS_BY_TYPES,
+  FILTER_POKEMONS_BY_SOURCE,
+  GET_POKEMONS,
+  GET_TYPES,
+  SET_CURRENT_PAGE,
+  SEARCH_POKEMONS,
+  CREATE_POKEMON,
+  GET_DETAILS,
+  CLEAR_DETAILS,
+  RESET_FILTERS,
+} from "./actions";
 
 const initialState = {
-  allPokemons: [],
-  updatedShowPokemons: [],
+  allPokemons: [], // Pokémons Original
+  pokemons: [], //Pokémons Copia
   types: [],
-  details: [],
+  details: [], //Detalles de un Pokémon
   //paginado
-  indexPage: 1,
-  quantityPokemons: 12,
-  indexFirstPokemon: 0,
-  indexLastPokemon: 12,
-  quantityPages: 1,
-  prevIndexPage: 1,
-
+  currentPage: 1,
+  totalPages: 1,
+  refresh: false,
 };
 
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
+const reducer = (state = initialState, { type, payload }) => {
+  switch (type) {
+    case GET_TYPES:
+      return {
+        ...state,
+        types: payload,
+      };
+
     case GET_POKEMONS:
       return {
         ...state,
-        allPokemons: action.payload,
-        // originalPokemons: action.payload,
-        updatedShowPokemons: action.payload.slice(state.indexFirstPokemon, state.indexLastPokemon),
-        quantityPages: Math.ceil(action.payload.length / state.quantityPokemons),
+        allPokemons: payload,
+        pokemons: payload,
+        totalPages: Math.ceil(payload.length / 12),
+        refresh: false,
       };
 
-    case POST_POKEMON:
+    case CREATE_POKEMON:
       return {
         ...state,
+        refresh: false,
       };
 
-    case SET_INDEX_PAGE: {
-      let index = action.payload || state.indexPage;
-      let first = (index - 1) * state.quantityPokemons;
-      let last = index * state.quantityPokemons;
-      let update = state.allPokemons.slice(first, last);
+    case SEARCH_POKEMONS:
       return {
         ...state,
-        indexPage: index,
-        indexLastPokemon: last,
-        indexFirstPokemon: first,
-        updatedShowPokemons: update,
-        prevIndexPage: state.indexPage,
+        pokemons: [payload],
+        currentPage: 1,
+        totalPages: 1,
+        refresh: false,
       };
-    }
 
-    case GET_POKEMON_BY_NAME_OR_ID:
+    case ORDER_POKEMONS_BY_NAME:
+      let orderedPokemons = [...state.pokemons];
+      orderedPokemons.sort((a, b) => {
+        if (payload) {
+          return a.name.localeCompare(b.name);
+        } else {
+          return b.name.localeCompare(a.name);
+        }
+      });
+
       return {
         ...state,
-        updatedShowPokemons: [action.payload],
+        pokemons: orderedPokemons,
       };
 
+    case FILTER_POKEMONS_BY_SOURCE:
+      let combinedPokemons = [];
+      const dbPokemons = state.allPokemons.filter((pokemon) => pokemon.created);
+      const apiPokemons = state.allPokemons.filter((pokemon) => !pokemon.created);
+
+      if (payload === "all") {
+        combinedPokemons = [...state.allPokemons];
+      } else if (payload === "db") {
+        combinedPokemons = [...dbPokemons];
+      } else if (payload === "api") {
+        combinedPokemons = [...apiPokemons];
+      }
+
+      return {
+        ...state,
+        pokemons: combinedPokemons,
+        currentPage: 1,
+        totalPages: Math.ceil(combinedPokemons.length / 12),
+        refresh: false,
+      };
+
+    case FILTER_POKEMONS_BY_TYPES:
+      let filteredPokemons = [];
+      if (payload === "all") {
+        filteredPokemons = state.allPokemons;
+      } else {
+        filteredPokemons = state.allPokemons.filter((pokemon) => pokemon.types.some((type) => type.name === payload));
+      }
+      return {
+        ...state,
+        pokemons: filteredPokemons,
+        currentPage: 1,
+        totalPages: Math.ceil(filteredPokemons.length / 12),
+        refresh: false,
+      };
+
+    case SET_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: payload,
+      };
     case GET_DETAILS:
       return {
         ...state,
-        details: action.payload,
+        details: payload,
       };
 
     case CLEAR_DETAILS:
       return {
         ...state,
         details: [],
+        pokemons: [],
       };
 
-    case GET_TYPES:
+    case RESET_FILTERS:
       return {
         ...state,
-        types: action.payload,
+        pokemons: state.allPokemons,
+        currentPage: 1,
+        totalPages: Math.ceil(state.allPokemons.length / 12),
+        refresh: false,
       };
 
     default:

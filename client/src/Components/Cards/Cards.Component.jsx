@@ -1,25 +1,32 @@
-import { useSelector } from "react-redux";
-
 import Card from "../Card/Card.Component";
 
 import "./Cards.Styles.css";
 
-const Cards = () => {
-  const updatedShowPokemons = useSelector((state) => state.updatedShowPokemons);
+const Cards = ({ pokemons, currentPage }) => {
+  const startIndex = (currentPage - 1) * 12;
+  const endIndex = currentPage * 12;
+
+  const slicedPokemons = pokemons.slice(startIndex, endIndex);
 
   return (
     <div className="cards-container">
-      {updatedShowPokemons?.map((pokemon) => (
-        <Card
-          key={pokemon.id}
-          id={pokemon.id}
-          name={pokemon.name}
-          types={pokemon.types}
-          image={pokemon.image}
-        />
-      ))}
+      {slicedPokemons.length > 0 ? (
+        slicedPokemons.map((pokemon) => (
+          <Card
+            key={pokemon.id}
+            name={pokemon.name}
+            image={pokemon.image}
+            id={pokemon.id}
+            types={pokemon.types}
+          />
+        ))
+      ) : (
+        <h2>No se encontraron Pokémon que cumplan con los criterios filtrados.</h2>
+      )}
     </div>
   );
 };
 
+
 export default Cards;
+

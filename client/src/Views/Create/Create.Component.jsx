@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { postPokemon, getTypes } from "../../Redux/actions";
+import { createPokemon, getPokemons, getTypes } from "../../Redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 import validations from "./validations";
@@ -10,7 +10,6 @@ const Create = () => {
   const types = useSelector((state) => state.types);
   const pokemonNames = useSelector((state) => state.allPokemons.map((pokemon) => pokemon.name));
   const [errors, setErrors] = useState({});
-  const [isSubmitDisabled, setSubmitDisabled] = useState(true);
   const [input, setInput] = useState({
     name: "",
     image: "",
@@ -36,7 +35,6 @@ const Create = () => {
       types: [],
     });
     setErrors({});
-    setSubmitDisabled(true);
   }
 
   useEffect(() => {
@@ -49,7 +47,6 @@ const Create = () => {
       [event.target.name]: event.target.value,
     });
     setErrors(validations({ ...input, [event.target.name]: event.target.value.toLowerCase() }, pokemonNames));
-    setSubmitDisabled(Object.keys(errors).length > 0);
   }
 
   function handleSelect(event) {
@@ -95,17 +92,18 @@ const Create = () => {
     });
 
     if (Object.keys(errors).length === 0 && input.name.length && input.types.length > 0) {
-      dispatch(postPokemon(input));
-      alert("Pokémon Creado.");
+      dispatch(createPokemon(input));
+      alert(`Felicitaciones! creaste al Pokémon ${input.name}.`);
+      dispatch(getPokemons());
       resetForm();
     }
   }
 
   return (
-    <div>
+    <div className="form-container">
       <h1>CREAR POKÉMON</h1>
       <form onSubmit={(event) => handleSubmit(event)}>
-        <div>
+        <div className="imput-container">
           <label>Name </label>
           <input
             type="text"
@@ -116,7 +114,6 @@ const Create = () => {
             onChange={handleChange}
           />
         </div>
-        {/* {errors.name && <h6>{errors.name}</h6>} */}
         {errors.name && <p className="error">{errors.name}</p>}
         <div>
           <label>HP</label>
@@ -193,7 +190,7 @@ const Create = () => {
           />
           <span> {input.weight}</span>
         </div>
-        <div>
+        <div className="input-container">
           <select
             value="default"
             onChange={(event) => handleSelect(event)}>
@@ -219,7 +216,7 @@ const Create = () => {
             )}
           </select>
         </div>
-        <div>
+        <div className="input-container">
           {input.types.map((selected) => (
             <div key={selected}>
               <p>{selected.charAt(0).toUpperCase() + selected.slice(1)}</p>
@@ -232,14 +229,14 @@ const Create = () => {
           ))}
         </div>
         {input.image && (
-          <div>
+          <div className="input-container">
             <img
               src={input.image}
               alt="Imagen no encontrada"
             />
           </div>
         )}
-        <div>
+        <div className="input-container">
           <label>URL Imagen </label>
           <input
             value={input.image}
@@ -254,10 +251,12 @@ const Create = () => {
         </div>
         <br />
         <button
-          disabled={isSubmitDisabled}
+          className="submit-button"
+          disabled={Object.keys(errors).length > 0}
           type="submit">
           Enviar
         </button>
+        <br />
         <br />
       </form>
     </div>

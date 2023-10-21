@@ -1,0 +1,13 @@
+.rectangle-41,
+.rectangle-41 * {
+  box-sizing: border-box;
+}
+.rectangle-41 {
+  background: var(
+    --yellow-gradient,
+    linear-gradient(180deg, rgba(245, 219, 19, 1) 0%, rgba(242, 184, 7, 1) 100%)
+  );
+  width: auto;
+  height: 1024px;
+  position: relative;
+}
