@@ -1,4 +1,66 @@
-.rectangle-41,
+body {
+  background-image: url('../../assets/img/background.jpg');
+  /* background-image: url('../../assets/img/92128.jpg'); */
+  background-size: cover; /* Ajusta la imagen de fondo al tamaño de la ventana */
+  background-position: center; /* Centra la imagen de fondo */
+  background-repeat: no-repeat; 
+  height: 100vh; /* Asegura que el fondo ocupe toda la altura de la ventana */
+  background-attachment: fixed;
+}
+
+.pokemonLogo {
+  max-width: 30%;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pokeBall {
+  width: 100px; 
+  height: auto; 
+  animation: wiggle 2s linear infinite
+}
+
+.pokemon-image {
+  width: 100px; 
+  height: auto; 
+  animation: wiggle 2s linear infinite
+}
+
+
+
+@keyframes wiggle {
+  0%, 7% {
+    transform: rotateZ(0);
+  }
+  15% {
+    transform: rotateZ(-15deg);
+  }
+  20% {
+    transform: rotateZ(10deg);
+  }
+  25% {
+    transform: rotateZ(-10deg);
+  }
+  30% {
+    transform: rotateZ(6deg);
+  }
+  35% {
+    transform: rotateZ(-4deg);
+  }
+  40%, 100% {
+    transform: rotateZ(0);
+  }
+}
+
+
+
+
+/* .rectangle-41,
 .rectangle-41 * {
   box-sizing: border-box;
 }
@@ -10,4 +72,4 @@
   width: auto;
   height: 1024px;
   position: relative;
-}
+} */

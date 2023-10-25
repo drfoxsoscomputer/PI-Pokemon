@@ -1,4 +1,6 @@
 .navContainer img {
+  align-items: start;
+  margin-right: 100px;
     width: 6rem;
     height: auto;
     animation: logoAnimation 3s infinite;
@@ -6,8 +8,9 @@
   
   .navContainer {
       display: flex;
-      justify-content: space-evenly;
-      align-items: center;
+      /* justify-content: space-evenly; */
+      justify-content: center;
+      /* flex-direction: center; */
       padding: 10px;
       background-color: rgba(255, 255, 255, 0.5);
       backdrop-filter: blur(5px);
@@ -19,17 +22,21 @@
     .navLink {
       background-color: rgba(255, 255, 255, 0.5);
       color: black;
-      background-color: #00ffff;
+      /* background-color: #00ffff; */
       text-decoration: none;
-      padding: 10px;
+      margin-left: 50px;
+      margin-right: 50px;
+      padding: 5px 10px;
       border-radius: 10px;
+      text-decoration: none;
     }
     
     .active {
         background-color: #007bff;
         color: #fff;
         padding: 5px 10px;
-    border: 1px solid #ccc;
+        border-radius: 10px;
+    /* border: 1px solid #ccc; */
         /* font-weight: bold; */
       /* box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff; */
       /* background-color: rgba(255, 255, 255, 0.5); */
@@ -45,10 +52,10 @@
       /* box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff; */
     }
   
-    .navLink:focus  
+    /* .navLink:focus  
     {
       box-shadow: 0 0 5px #ff4081, 0 0 10px #ff4081, 0 0 15px #ff4081;
-    }
+    } */
   
     .navContainer input:focus {
       border-bottom-color: #00ffff;

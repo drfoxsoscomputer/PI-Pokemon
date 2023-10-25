@@ -5,13 +5,60 @@
     justify-content: space-evenly;
     padding: 0.5em;
     margin: 0.5em;
+    border: 1px solid grey;
+    border-radius: 20px;
+    cursor: pointer;
+    background-size: 95%;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* opacity: 0.8; */
+  }
+
+  
+  .type-label {
+    align-items: end;
+    justify-content: flex-end;
+    width: 80px; 
+    height: auto;
+    border: 2px solid white;
+    border-radius: 50px;
+    /* opacity: 0.8; */
+    /* margin-right: 10px;  */
+  }
+
+  .img {
+    height: 250px;
+    opacity: 0;
+    width: 250px;
+  }
+
+  .img:hover{
+    opacity: 1;
+    transform: scale(1.2);
+    transition: all .3s ease-out;
+  }
+
+  .name {
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+    border-radius: 20px;
+    color: white;
+  }
+
+  .id {
+    color: white;
+    
+  }
+
+/* .card-container {
+    width: 16rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0.5em;
+    margin: 0.5em;
     background-color: transparent;
     border: 1px solid grey;
     border-radius: 5px;
     cursor: pointer;
-}
-
-.img:hover{
-    transform: scale(1.5);
-    transition: all .3s ease-out;
-}
+} */

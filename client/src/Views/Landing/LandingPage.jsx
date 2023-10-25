@@ -6,6 +6,9 @@ import { getPokemons, getTypes } from "../../Redux/actions";
 
 import "./LandingPage.Styles.css";
 
+import logo from "../../assets/img/logo2.png";
+import pokeBall from "../../assets/img/pokeball.png";
+
 const LandingPage = () => {
   const dispatch = useDispatch();
 
@@ -15,9 +18,23 @@ const LandingPage = () => {
   }, [dispatch]);
 
   return (
-    <div className="rectangle-41">
+    <div className="landing-page">
+      <div>
+        <img
+          className="pokemonLogo"
+          src={logo}
+          alt=""
+        />
+      </div>
+      <div>
+      </div>
       <Link to="/home">
-        <button className="button">Enter</button>
+        <img
+          className="pokeBall"
+          src={pokeBall}
+          alt=""
+        />
+        {/* <button className="button">Enter</button> */}
       </Link>
     </div>
   );

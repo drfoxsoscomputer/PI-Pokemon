@@ -3,74 +3,97 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { clearDetails, getDetails } from "../../Redux/actions";
-import "./Detail.Styles.css";
 import Loading from "../../Components/Loading/Loading.Component";
+import typesBackground from "../../utils/colors";
+import "./Detail.Styles.css";
 
 const Detail = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const pokemonDetail = useSelector((state) => state.details);
 
+  const getBackgroundColor = () => {
+    if (pokemonDetail.types && pokemonDetail.types.length > 0) {
+      const primaryType = pokemonDetail.types[0].name;
+      const backgroundStyle = typesBackground[primaryType] || {};
+
+      return backgroundStyle;
+    }
+    return {};
+  };
+
   useEffect(() => {
     dispatch(getDetails(id));
     return () => {
       dispatch(clearDetails(id));
     };
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   return (
     <div className="container">
       {pokemonDetail?.name ? (
-        <div className="cardDetail">
+        <div
+          className="cardDetail"
+          style={getBackgroundColor()}>
           <div className="cardAbout">
             {pokemonDetail.image && (
               <img
                 src={pokemonDetail.image}
                 alt={pokemonDetail.name}
-                className="img"
+                className="pokemon-img"
               />
             )}
-            <div className="aboutPokemon">
-              <h2>{pokemonDetail.name.toUpperCase()}</h2>
-              <div className="data">
-                <p>
-                  <span>ID: </span>
-                  {pokemonDetail.id}
-                </p>
-                <p>
-                  <span>HP: </span>
-                  {pokemonDetail.hp}
-                </p>
-                <p>
-                  <span>Attack: </span>
-                  {pokemonDetail.attack}
-                </p>
-                <p>
-                  <span>Defense:</span> {pokemonDetail.defense}
-                </p>
-                <p>
-                  <span>Speed:</span> {pokemonDetail.speed}
-                </p>
-                <p>
-                  <span>Height:</span> {pokemonDetail.height}
-                </p>
-                <p>
-                  <span>Weight:</span> {pokemonDetail.weight}
-                </p>
-                <div>
-                  {pokemonDetail?.types.map((type, index) => (
-                    <span key={index}>
-                      {type.name.toUpperCase()}
-                      {index < pokemonDetail.types.length - 1 ? " " : ""}
-                    </span>
-                  ))}
-                </div>
-              </div>
+
+            {pokemonDetail?.types.map((type, index) => (
+              <span key={index}>
+                <img
+                  src={`../../assets/img/labels/${type.name}.png`}
+                  alt={pokemonDetail.types.name}
+                  className="type-image"
+                />
+                {/* {type.name.toUpperCase()} */}
+                {index < pokemonDetail.types.length - 1 ? " " : ""}
+              </span>
+            ))}
+          </div>
+          <div>
+            <h3 className="title"># {pokemonDetail.id}</h3>
+            <h2 className="title">{pokemonDetail.name.toUpperCase()}</h2>
+            <div className="data">
+              <p>
+                {pokemonDetail.hp}
+                <span>HP</span>
+              </p>
+              <p>
+                {pokemonDetail.attack}
+                <span>Attack</span>
+              </p>
+              <p>
+                {pokemonDetail.defense}
+                <span>Defense</span>
+              </p>
+              <p>
+                {pokemonDetail.speed}
+                <span>Speed</span>
+              </p>
+              <p>
+                {pokemonDetail.height}
+                <span>Height</span>
+              </p>
+              <p>
+                {pokemonDetail.weight}
+                <span>Weight</span>
+              </p>
             </div>
           </div>
-          <br />
-          <Link to="/home">Back</Link>
-          <br />
+          {/* </div> */}
+          <div>
+            <Link
+              className="button-back"
+              to="/home">
+              Back
+            </Link>
+          </div>
         </div>
       ) : (
         <Loading />

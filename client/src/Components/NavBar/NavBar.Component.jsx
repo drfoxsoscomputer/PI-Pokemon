@@ -1,14 +1,28 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 import "./NavBar.Styles.css";
+import logo from "../../assets/img/logo.png";
 
 const NavBar = () => {
   return (
     <nav className="navContainer">
-      <NavLink to="/">Inicio</NavLink>
-      <NavLink to="/home">Home</NavLink>
-      <NavLink to="/create">Crear Pokemon</NavLink>
-      
+      <Link to={"/"}>
+        <img
+          src={logo}
+          alt=""
+        />
+      </Link>
+
+      <NavLink
+        className={({ isActive }) => (isActive ? "active" : "navLink")}
+        to="/home">
+        Home
+      </NavLink>
+      <NavLink
+        className={({ isActive }) => (isActive ? "active" : "navLink")}
+        to="/create">
+        Crear Pokemon
+      </NavLink>
     </nav>
   );
 };

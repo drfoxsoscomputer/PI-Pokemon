@@ -3,6 +3,7 @@ import { createPokemon, getPokemons, getTypes } from "../../Redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 import validations from "./validations";
+
 import "./Create.Styles.css";
 
 const Create = () => {
@@ -10,6 +11,7 @@ const Create = () => {
   const types = useSelector((state) => state.types);
   const pokemonNames = useSelector((state) => state.allPokemons.map((pokemon) => pokemon.name));
   const [errors, setErrors] = useState({});
+
   const [input, setInput] = useState({
     name: "",
     image: "",
@@ -100,126 +102,366 @@ const Create = () => {
   }
 
   return (
-    <div className="form-container">
-      <h1>CREAR POKÉMON</h1>
-      <form onSubmit={(event) => handleSubmit(event)}>
-        <div className="imput-container">
-          <label>Name </label>
-          <input
-            type="text"
-            value={input.name}
-            name="name"
-            autoComplete="off"
-            spellCheck="false"
-            onChange={handleChange}
-          />
-        </div>
-        {errors.name && <p className="error">{errors.name}</p>}
-        <div>
-          <label>HP</label>
-          <input
-            type="range"
-            min="0"
-            max="500"
-            value={input.hp}
-            name="hp"
-            onChange={handleChange}
-          />
-          <span> {input.hp}</span>
-          {errors.hp && <p className="error">{errors.hp}</p>}
-        </div>
-        <div>
-          <label>Attack</label>
-          <input
-            type="range"
-            min="0"
-            max="500"
-            value={input.attack}
-            name="attack"
-            onChange={handleChange}
-          />
-          <span> {input.attack}</span>
-          {errors.attack && <p className="error">{errors.attack}</p>}
-        </div>
-        <div>
-          <label>Defense</label>
-          <input
-            type="range"
-            min="0"
-            max="500"
-            value={input.defense}
-            name="defense"
-            onChange={handleChange}
-          />
-          <span> {input.defense}</span>
-          {errors.defense && <p className="error">{errors.defense}</p>}
-        </div>
-        <div>
-          <label>Speed</label>
-          <input
-            type="range"
-            min="0"
-            max="500"
-            value={input.speed}
-            name="speed"
-            onChange={handleChange}
-          />
-          <span> {input.speed}</span>
-        </div>
-        <div>
-          <label>Height</label>
-          <input
-            type="range"
-            min="0"
-            max="500"
-            value={input.height}
-            name="height"
-            onChange={handleChange}
-          />
-          <span> {input.height}</span>
-        </div>
-        <div>
-          <label>Weight</label>
-          <input
-            type="range"
-            min="0"
-            max="500"
-            value={input.weight}
-            name="weight"
-            onChange={handleChange}
-          />
-          <span> {input.weight}</span>
-        </div>
-        <div className="input-container">
-          <select
-            value="default"
-            onChange={(event) => handleSelect(event)}>
-            <option
-              disabled
-              value="default">
-              Seleciona uno o dos Tipos
-            </option>
-            {input.types.length < 2 ? (
-              types.map((type) => (
+    <div>
+      <div className="container-main">
+        <div className="container-form">
+          <h1>CREAR POKÉMON</h1>
+          <form onSubmit={(event) => handleSubmit(event)}>
+            <div>
+              <label>Name </label>
+              <input
+                type="text"
+                value={input.name}
+                name="name"
+                autoComplete="off"
+                spellCheck="false"
+                onChange={handleChange}
+              />
+            </div>
+            {errors.name && <p className="error">{errors.name}</p>}
+            <div>
+              <label>HP</label>
+              <input
+                type="range"
+                min="0"
+                max="500"
+                value={input.hp}
+                name="hp"
+                onChange={handleChange}
+              />
+              {/* <span> {input.hp}</span> */}
+              {errors.hp && <p className="error">{errors.hp}</p>}
+            </div>
+            <div>
+              <label>Attack</label>
+              <input
+                type="range"
+                min="0"
+                max="500"
+                value={input.attack}
+                name="attack"
+                onChange={handleChange}
+              />
+              {/* <span> {input.attack}</span> */}
+              {errors.attack && <p className="error">{errors.attack}</p>}
+            </div>
+            <div>
+              <label>Defense</label>
+              <input
+                type="range"
+                min="0"
+                max="500"
+                value={input.defense}
+                name="defense"
+                onChange={handleChange}
+              />
+              {/* <span> {input.defense}</span> */}
+              {errors.defense && <p className="error">{errors.defense}</p>}
+            </div>
+            <div>
+              <label>Speed</label>
+              <input
+                type="range"
+                min="0"
+                max="500"
+                value={input.speed}
+                name="speed"
+                onChange={handleChange}
+              />
+              {/* <span> {input.speed}</span> */}
+            </div>
+            <div>
+              <label>Height</label>
+              <input
+                type="range"
+                min="0"
+                max="500"
+                value={input.height}
+                name="height"
+                onChange={handleChange}
+              />
+              {/* <span> {input.height}</span> */}
+            </div>
+            <div>
+              <label>Weight</label>
+              <input
+                type="range"
+                min="0"
+                max="500"
+                value={input.weight}
+                name="weight"
+                onChange={handleChange}
+              />
+              {/* <span> {input.weight}</span> */}
+            </div>
+
+            <div>
+              <label>URL Imagen </label>
+              <input
+                value={input.image}
+                name="image"
+                title="Image URL"
+                placeholder="URL imagen..."
+                autoComplete="off"
+                spellCheck="false"
+                onChange={handleChange}
+              />
+              {errors.image && <p className="error">{errors.image}</p>}
+            </div>
+
+            <div>
+              <select
+                value="default"
+                onChange={(event) => handleSelect(event)}>
                 <option
-                  value={type.name}
-                  key={type.name}>
-                  {type.name}
+                  disabled
+                  value="default">
+                  Seleciona uno o dos Tipos
                 </option>
-              ))
-            ) : (
-              <option
-                value="full"
-                disabled>
-                Solo puedes elegir 2 Tipos máximo
-              </option>
-            )}
-          </select>
+                {input.types.length < 2 ? (
+                  types.map((type) => (
+                    <option
+                      value={type.name}
+                      key={type.name}>
+                      {type.name.toUpperCase()}
+                    </option>
+                  ))
+                ) : (
+                  <option
+                    value="full"
+                    disabled>
+                    Solo puedes elegir 2 Tipos máximo
+                  </option>
+                )}
+              </select>
+            </div>
+
+            <br />
+            <button
+              className="submit-button"
+              disabled={Object.keys(errors).length > 0}
+              type="submit">
+              Enviar
+            </button>
+          </form>
         </div>
-        <div className="input-container">
+        <div className="container-cards">
+          <div className="container-info">
+            <h2> {input.name || "Name"}</h2>
+            <p className="stats">{input.hp || " "} Healer Point</p>
+            <p className="stats">{input.attack || " "} Attack</p>
+            <p className="stats">{input.defense || " "} Defense</p>
+            <p className="stats">{input.speed || " "} Speed</p>
+            <p className="stats">{input.height || " "} Height</p>
+            <p className="stats">{input.weight || " "} Weight</p>
+          </div>
+          <div className="container-image">
+            {input.image && (
+              <div>
+                <img
+                  src={input.image}
+                  alt="Imagen no encontrada"
+                />
+              </div>
+            )}
+            <div>
+              {input.types.map((selected) => (
+                <div key={selected}>
+                  <p>{selected.toUpperCase()}</p>
+                  {/* <img
+                    src={`../assets/img/types/avatars/${types.name}.png`}
+                    alt={types.name}
+                    className="type-image"
+                  /> */}
+                  <button
+                    id={selected}
+                    onClick={handleClick}>
+                    ❌
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* viejo */}
+      {/* <div className="form-container">
+        <h1>CREAR POKÉMON</h1>
+
+        <form onSubmit={(event) => handleSubmit(event)}>
+          <div className="imput-container">
+            <label>Name </label>
+            <input
+              type="text"
+              value={input.name}
+              name="name"
+              autoComplete="off"
+              spellCheck="false"
+              onChange={handleChange}
+            />
+          </div>
+          {errors.name && <p className="error">{errors.name}</p>}
+          <div>
+            <label>HP</label>
+            <input
+              type="range"
+              min="0"
+              max="500"
+              value={input.hp}
+              name="hp"
+              onChange={handleChange}
+            />
+            <span> {input.hp}</span>
+            {errors.hp && <p className="error">{errors.hp}</p>}
+          </div>
+          <div>
+            <label>Attack</label>
+            <input
+              type="range"
+              min="0"
+              max="500"
+              value={input.attack}
+              name="attack"
+              onChange={handleChange}
+            />
+            <span> {input.attack}</span>
+            {errors.attack && <p className="error">{errors.attack}</p>}
+          </div>
+          <div>
+            <label>Defense</label>
+            <input
+              type="range"
+              min="0"
+              max="500"
+              value={input.defense}
+              name="defense"
+              onChange={handleChange}
+            />
+            <span> {input.defense}</span>
+            {errors.defense && <p className="error">{errors.defense}</p>}
+          </div>
+          <div>
+            <label>Speed</label>
+            <input
+              type="range"
+              min="0"
+              max="500"
+              value={input.speed}
+              name="speed"
+              onChange={handleChange}
+            />
+            <span> {input.speed}</span>
+          </div>
+          <div>
+            <label>Height</label>
+            <input
+              type="range"
+              min="0"
+              max="500"
+              value={input.height}
+              name="height"
+              onChange={handleChange}
+            />
+            <span> {input.height}</span>
+          </div>
+          <div>
+            <label>Weight</label>
+            <input
+              type="range"
+              min="0"
+              max="500"
+              value={input.weight}
+              name="weight"
+              onChange={handleChange}
+            />
+            <span> {input.weight}</span>
+          </div>
+          <div className="input-container">
+            <select
+              value="default"
+              onChange={(event) => handleSelect(event)}>
+              <option
+                disabled
+                value="default">
+                Seleciona uno o dos Tipos
+              </option>
+              {input.types.length < 2 ? (
+                types.map((type) => (
+                  <option
+                    value={type.name}
+                    key={type.name}>
+                    {type.name}
+                  </option>
+                ))
+              ) : (
+                <option
+                  value="full"
+                  disabled>
+                  Solo puedes elegir 2 Tipos máximo
+                </option>
+              )}
+            </select>
+          </div>
+          <div className="input-container">
+            {input.types.map((selected) => (
+              <div key={selected}>
+                <p>{selected.charAt(0).toUpperCase() + selected.slice(1)}</p>
+                <button
+                  id={selected}
+                  onClick={handleClick}>
+                  ❌
+                </button>
+              </div>
+            ))}
+          </div>
+          {input.image && (
+            <div className="input-container">
+              <img
+                src={input.image}
+                alt="Imagen no encontrada"
+              />
+            </div>
+          )}
+          <div className="input-container">
+            <label>URL Imagen </label>
+            <input
+              value={input.image}
+              name="image"
+              title="Image URL"
+              placeholder="URL imagen..."
+              autoComplete="off"
+              spellCheck="false"
+              onChange={handleChange}
+            />
+            {errors.image && <p className="error">{errors.image}</p>}
+          </div>
+
+          <br />
+          <button
+            className="submit-button"
+            disabled={Object.keys(errors).length > 0}
+            type="submit">
+            Enviar
+          </button>
+          <br />
+          <br />
+        </form>
+      </div> */}
+      {/* <div className="preview-container">
+        {input.image && (
+          <div>
+            <img
+              src={input.image}
+              alt="Imagen no encontrada"
+            />
+          </div>
+        )}
+
+        <div>
           {input.types.map((selected) => (
             <div key={selected}>
-              <p>{selected.charAt(0).toUpperCase() + selected.slice(1)}</p>
+              <p>{selected.toUpperCase()}</p>
               <button
                 id={selected}
                 onClick={handleClick}>
@@ -228,37 +470,7 @@ const Create = () => {
             </div>
           ))}
         </div>
-        {input.image && (
-          <div className="input-container">
-            <img
-              src={input.image}
-              alt="Imagen no encontrada"
-            />
-          </div>
-        )}
-        <div className="input-container">
-          <label>URL Imagen </label>
-          <input
-            value={input.image}
-            name="image"
-            title="Image URL"
-            placeholder="URL imagen..."
-            autoComplete="off"
-            spellCheck="false"
-            onChange={handleChange}
-          />
-          {errors.image && <p className="error">{errors.image}</p>}
-        </div>
-        <br />
-        <button
-          className="submit-button"
-          disabled={Object.keys(errors).length > 0}
-          type="submit">
-          Enviar
-        </button>
-        <br />
-        <br />
-      </form>
+      </div> */}
     </div>
   );
 };

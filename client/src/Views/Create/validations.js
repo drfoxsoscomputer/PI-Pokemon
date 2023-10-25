@@ -7,7 +7,7 @@ const validations = (input, pokemonNames) => {
     errors.name = "❌ Name no puede estar vacio";
   } else if (pokemonNames.includes(input.name)) {
     errors.name = "❌ Ya existe un Pokémon con ese nombre";
-  } else if (input.name.length < 4 || input.name.length > 10) {
+  } else if (input.name.length < 3 || input.name.length > 10) {
     errors.name = "❌ El Nombre del Pokémon debe tener mas de 3 letras y máximo 10";
   } else if (!RegExpression.test(input.name)) {
     errors.name = "❌ El Nombre del Pokémon debe contener solo letras";
