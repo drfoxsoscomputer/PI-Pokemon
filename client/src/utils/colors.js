@@ -16,6 +16,8 @@ import steel from "../assets/img/icons/steel.svg";
 import dragon from "../assets/img/icons/dragon.svg";
 import dark from "../assets/img/icons/dark.svg";
 import fairy from "../assets/img/icons/fairy.svg";
+import unknown from "../assets/img/icons/unknown.svg";
+import shadow from "../assets/img/icons/shadow.svg";
 
 const typesBackground = {
   normal: {
@@ -83,12 +85,20 @@ const typesBackground = {
     backgroundImage: `url(${dragon})`,
   },
   dark: {
-    backgroundColor: "#705746",
+    backgroundColor: "#5A5465",
     backgroundImage: `url(${dark})`,
   },
   fairy: {
     backgroundColor: "#D685AD",
     backgroundImage: `url(${fairy})`,
+  },
+  unknown: {
+    backgroundColor: "#68A091",
+    backgroundImage: `url(${unknown})`,
+  },
+  shadow: {
+    backgroundColor: "#404040",
+    backgroundImage: `url(${shadow})`,
   },
 };
 
