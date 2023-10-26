@@ -15,14 +15,6 @@
     cursor: pointer;
   }
 
-  /* .center-button {
-    border-top-left-radius: 8px; 
-    border-bottom-left-radius: 8px; 
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-    cursor: pointer;
-  } */
-
   .last-button {
     border-top-right-radius: 8px; 
     border-bottom-right-radius: 8px; 

@@ -21,7 +21,7 @@ const NavBar = () => {
       <NavLink
         className={({ isActive }) => (isActive ? "active" : "navLink")}
         to="/create">
-        Crear Pokemon
+        Create Pokémon
       </NavLink>
     </nav>
   );

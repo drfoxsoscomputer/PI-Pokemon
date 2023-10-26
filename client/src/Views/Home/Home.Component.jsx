@@ -4,15 +4,7 @@ import { getPokemons, getTypes } from "../../Redux/actions";
 
 import Cards from "../../Components/Cards/Cards.Component";
 import Pagination from "../../Components/Pagination/Pagination.Component";
-// import Search from "../../Components/Search/Search.Component";
-
-// import Filterstypes from "../../Components/FiltersTypes/FiltersTypes.Component";
-// import FilterOrder from "../../Components/FilterOrder/FilterOrder.component";
-// import FilterSource from "../../Components/FilterSource/FilterSource.Component";
-// import ResetFilters from "../../Components/FilterReset/FilterReset.component";
-
-import FiltersBar from "../../Components/FiltersBar/FiltersBar.Component"
-
+import FiltersBar from "../../Components/FiltersBar/FiltersBar.Component";
 import Loading from "../../Components/Loading/Loading.Component";
 
 import "./Home.Styles.css";
@@ -24,27 +16,17 @@ const Home = () => {
   useEffect(() => {
     dispatch(getTypes());
     dispatch(getPokemons());
-
-    // if (refresh) {
-    //   dispatch(getPokemons());
-    //   dispatch(getTypes());
-    // }
   }, [dispatch]);
 
   return (
     <div>
       <div>
-        {/* <Search /> */}
-        {/* <FilterSource />
-        <Filterstypes />
-        <FilterOrder />
-        <ResetFilters /> */}
         <FiltersBar />
       </div>
 
       {pokemons.length > 0 ? (
         <div>
-          {/* <Pagination /> */}
+          <Pagination />
 
           <Cards
             allPokemons={allPokemons}

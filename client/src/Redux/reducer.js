@@ -1,16 +1,16 @@
 import {
-  ORDER_POKEMONS_BY_NAME,
-  FILTER_POKEMONS_BY_TYPES,
-  FILTER_POKEMONS_BY_SOURCE,
-  GET_POKEMONS,
   GET_TYPES,
-  SET_CURRENT_PAGE,
   SEARCH_POKEMONS,
-  CREATE_POKEMON,
+  ORDER_POKEMONS_BY_NAME,
+  FILTER_POKEMONS_BY_SOURCE,
+  FILTER_POKEMONS_BY_TYPES,
+  GET_POKEMONS,
+  SET_CURRENT_PAGE,
   GET_DETAILS,
   CLEAR_DETAILS,
+  POST_POKEMON,
   RESET_FILTERS,
-} from "./actions";
+} from "./actions-types";
 
 const initialState = {
   allPokemons: [], // Pokémons Original
@@ -40,7 +40,7 @@ const reducer = (state = initialState, { type, payload }) => {
         refresh: false,
       };
 
-    case CREATE_POKEMON:
+    case POST_POKEMON:
       return {
         ...state,
         refresh: false,

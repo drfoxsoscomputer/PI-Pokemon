@@ -18,7 +18,6 @@ const FiltersTypes = () => {
 
   return (
     <label htmlFor="filter" className="label">
-      {/* <p>Filter by Types</p> */}
       <select
         name="filter"
         onChange={onFiltersTypes}

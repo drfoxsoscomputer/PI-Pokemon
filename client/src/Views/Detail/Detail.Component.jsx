@@ -51,7 +51,7 @@ const Detail = () => {
                   alt={pokemonDetail.types.name}
                   className="type-image"
                 />
-                {/* {type.name.toUpperCase()} */}
+
                 {index < pokemonDetail.types.length - 1 ? " " : ""}
               </span>
             ))}
@@ -86,7 +86,7 @@ const Detail = () => {
               </p>
             </div>
           </div>
-          {/* </div> */}
+
           <div>
             <Link
               className="button-back"

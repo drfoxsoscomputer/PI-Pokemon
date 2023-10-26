@@ -39,7 +39,6 @@ const Card = (pokemons) => {
               alt={types.name}
               className="type-label"
             />
-            {/* {type.name.toUpperCase()} */}
             {index < types.length - 1 ? " " : ""}
           </span>
         ))}

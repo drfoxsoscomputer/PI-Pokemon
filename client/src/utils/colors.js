@@ -21,7 +21,6 @@ const typesBackground = {
   normal: {
     backgroundColor: "#A8A77A",
     backgroundImage: `url(${normal})`,
-    // icono: `url(${normalIco})`,
   },
   fire: {
     backgroundColor: "#EE8130",

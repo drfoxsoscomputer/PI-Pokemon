@@ -34,7 +34,6 @@ const LandingPage = () => {
           src={pokeBall}
           alt=""
         />
-        {/* <button className="button">Enter</button> */}
       </Link>
     </div>
   );

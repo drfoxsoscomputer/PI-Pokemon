@@ -15,14 +15,11 @@ const Search = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (nameOrId.trim() !== "") {
-      dispatch(searchPokemons(nameOrId));
+      dispatch(searchPokemons(nameOrId.trim()));
       setNameOrId("");
     }
   };
-  // const onClickClearHandler = () => {
-  //   setNameOrId("");
-  //   dispatch(getPokemons());
-  // };
+  
 
   return (
     <div className="search-container">
@@ -30,7 +27,7 @@ const Search = () => {
         <input
           type="text"
           className="input-search"
-          placeholder="Search Pokemon"
+          placeholder="Search Pokémon by Name ..."
           value={nameOrId}
           onChange={handleSearch}
         />
@@ -40,11 +37,6 @@ const Search = () => {
           Search
         </button>
 
-        {/* <button
-          className="reset-button"
-          onClick={onClickClearHandler}>
-          Refresh
-        </button> */}
       </form>
     </div>
   );

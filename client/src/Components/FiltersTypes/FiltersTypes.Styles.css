@@ -1,16 +1,10 @@
 
 .label {
     display: block;
-    /* margin-top: 1px; */
   }
-  
-  /* .label p {
-    font-weight: bold;
-  } */
   
   .select {
     padding: 5px 10px;
-    /* font-size: 14px; */
     border-radius: 8px;
     border: 1px solid #ccc;
   }

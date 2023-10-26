@@ -1,11 +1,11 @@
 import React from 'react';
-import './Loading.Styles.css'; // Estilo CSS para el loader
+import './Loading.Styles.css';
 
 const Loading = () => {
   return (
     <div className="loader-container">
       <div className="loader"></div>
-      <p>Cargando...</p>
+      <p>Loading...</p>
     </div>
   );
 };
