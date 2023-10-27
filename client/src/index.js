@@ -9,8 +9,8 @@ import App from "./App";
 // local
 // axios.defaults.baseURL = "http://localhost:3001";
 
-// Deploy
-axios.defaults.baseURL = "https://pi-pokemon-production-4ff0.up.railway.app/";
+// Deploy render
+axios.defaults.baseURL = "https://servidor-pokemons.onrender.com/";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
