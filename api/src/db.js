@@ -17,7 +17,11 @@ const path = require("path");
 const sequelize = new Sequelize(DB_DEPLOY, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-  sync: { force: true },
+  dialectOptions: {
+    ssl: {
+      require: true,
+    }
+  }
 });
 
 const basename = path.basename(__filename);
