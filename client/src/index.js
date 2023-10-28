@@ -7,10 +7,10 @@ import store from "./Redux/store";
 import App from "./App";
 
 // local
-axios.defaults.baseURL = "http://localhost:3001";
+// axios.defaults.baseURL = "http://localhost:3001";
 
 // Deploy render
-// axios.defaults.baseURL = "https://servidor-pokemons.onrender.com/";
+axios.defaults.baseURL = "https://servidor-pokemons.onrender.com/";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

@@ -10,7 +10,8 @@
   .first-button {
     border-top-left-radius: 8px; 
     border-bottom-left-radius: 8px; 
-    margin-top: 1px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     padding: 5px 10px;
     border: 1px solid #ccc;
     cursor: pointer;
