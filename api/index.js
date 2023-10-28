@@ -20,7 +20,7 @@ const { PORT } = process.env || 3001;
 
 // Syncing all the models at once.
 conn
-  .sync({ force: false }) // cambiar a false al terminar
+  .sync({ force: true }) // cambiar a false al terminar
   .then(() => {
     app.listen(PORT, () => {
       console.log(`✔ Server is listening on port: ${PORT} 👍`); // eslint-disable-line no-console

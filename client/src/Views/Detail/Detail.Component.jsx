@@ -58,8 +58,10 @@ const Detail = () => {
             </div>
           </div>
           <div className="data">
-            <h3 className="title"># {pokemonDetail.id}</h3>
-            <h2 className="title">{pokemonDetail.name.toUpperCase()}</h2>
+            <div className="title">
+              <h3># {pokemonDetail.id}</h3>
+              <h2>{pokemonDetail.name.toUpperCase()}</h2>
+            </div>
             <div className="data">
               <p>
                 {pokemonDetail.hp}
