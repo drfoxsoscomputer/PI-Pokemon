@@ -43,20 +43,21 @@ const Detail = () => {
                 className="pokemon-img"
               />
             )}
+            <div className="type-image">
+              {pokemonDetail?.types.map((type, index) => (
+                <span key={index}>
+                  <img
+                    src={`../../assets/img/labels/${type.name}.png`}
+                    alt={pokemonDetail.types.name}
+                    className="type-image type-label"
+                  />
 
-            {pokemonDetail?.types.map((type, index) => (
-              <span key={index}>
-                <img
-                  src={`../../assets/img/labels/${type.name}.png`}
-                  alt={pokemonDetail.types.name}
-                  className="type-image"
-                />
-
-                {index < pokemonDetail.types.length - 1 ? " " : ""}
-              </span>
-            ))}
+                  {index < pokemonDetail.types.length - 1 ? " " : ""}
+                </span>
+              ))}
+            </div>
           </div>
-          <div>
+          <div className="data">
             <h3 className="title"># {pokemonDetail.id}</h3>
             <h2 className="title">{pokemonDetail.name.toUpperCase()}</h2>
             <div className="data">

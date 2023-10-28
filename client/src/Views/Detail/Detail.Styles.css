@@ -1,44 +1,57 @@
 .container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
 
-.title {
-  color: white;
-}
+
 
 .cardDetail {
   border-radius: 10px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  width: 100%;
-  max-width: 800px;
+  grid-template-columns: 3fr 1fr;
+  width: 50%;
+  /* max-width: 800px; */
   background-repeat: no-repeat;
   background-position: center;
   background-size: 50%;
   margin: 20px;
+  background-color: rgb(252, 0, 0);
 }
 
 .cardAbout {
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
   text-align: center;
 }
 
 .cardAbout img.pokemon-img {
-  min-width: 300px;
-  min-height: 300px;
-  max-width: 400px;
-  max-height: 400px;
+  min-width: 250px;
+  min-height: 250px;
+  max-width: 300px;
+  max-height: 300px;
 }
 
-
 .type-image {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* align-items: center; */
   max-width: 100px;
-  height: auto;
-  margin-right: 5px;
-  margin-top: 50px;
+  /* height: auto; */
+  /* margin-right: 5px; */
+  margin: 10px 10px 10px 10px;
+  /* margin-top: 10px; */
+  /* margin: 10px  10px  0px  0px; */
+}
+.type-label {
+  border: 2px solid white;
+  border-radius: 50px;
+  
 }
 
 .aboutPokemon {
@@ -46,12 +59,25 @@
   text-align: center;
 }
 
+.data {
+  background-color: transparent;
+  padding-left: 10px;
+  padding-right: 10px;
+  /* background-color: rgba(255, 255, 255, 0.5); */
+  /* backdrop-filter: blur(5px); */
+}
+
+.title {
+  color: white;
+  /* padding: 0px 10px 0px 0px; */
+  padding-bottom: 0px;
+}
 
 .data p {
   border-radius: 10px;
   display: grid;
   font-weight: bold;
-  margin: 10px 140px;
+  /* margin: 10px 140px; */
   color: black;
   background-color: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(5px);
@@ -74,3 +100,16 @@
 .button-back:hover {
   background-color: #005ea7;
 }
+
+
+@media (max-width: 800px) {
+  .cardDetail {
+    grid-template-columns: 1fr;
+    width: 100%;
+    background-size: 90%;
+  }
+  }
+  .title {
+    color: black;
+  }
+  
