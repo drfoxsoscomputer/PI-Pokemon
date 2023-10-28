@@ -265,7 +265,7 @@ const Create = () => {
               <div>
                 <img
                   src={input.image}
-                  alt="Image not found"
+                  alt="Not found"
                 />
               </div>
             )}

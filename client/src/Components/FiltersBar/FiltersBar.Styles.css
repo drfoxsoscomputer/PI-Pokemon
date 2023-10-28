@@ -1,12 +1,21 @@
 
 .filters-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+
+.filter {
+  margin: 10px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
+}
+
+
+@media (max-width: 768px) {
+.filters-bar {
+  flex-direction: column;
   
-  
-  .filter {
-    margin-block: 10px;
-  }
-  
+}
+}
+

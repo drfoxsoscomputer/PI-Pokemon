@@ -6,6 +6,7 @@ import Home from "./Views/Home/Home.Component";
 import Detail from "./Views/Detail/Detail.Component";
 import Create from "./Views/Create/Create.Component";
 import NavBar from "./Components/NavBar/NavBar.Component";
+import Error from "./Views/Error/Error.Component";
 
 const App = () => {
   const location = useLocation();
@@ -31,6 +32,10 @@ const App = () => {
         <Route
           path="/create"
           element={<Create />}
+        />
+        <Route
+          path="*"
+          element={<Error />}
         />
       </Routes>
     </div>

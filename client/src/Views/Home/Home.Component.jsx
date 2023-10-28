@@ -20,7 +20,7 @@ const Home = () => {
       })
       .catch((error) => {
         setIsLoading(false); // También desactiva el Loading en caso de error
-        console.error(error);
+        // console.error(error);
       });
   }, [dispatch]);
 
