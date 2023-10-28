@@ -59,7 +59,7 @@ const Detail = () => {
           </div>
           <div className="data">
             <div className="title">
-              <h3># {pokemonDetail.id}</h3>
+              <h3 className=""># {pokemonDetail.id}</h3>
               <h2>{pokemonDetail.name.toUpperCase()}</h2>
             </div>
             <div className="data">

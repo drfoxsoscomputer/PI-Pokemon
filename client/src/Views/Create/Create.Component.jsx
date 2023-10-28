@@ -238,24 +238,25 @@ const Create = () => {
               </select>
               {errors.types && <p className="error">{errors.types}</p>}
             </div>
-            <br />
-            <p></p>
-            <p>* Required fields</p>
-            <button
-              className="submit-button"
-              // disabled={!errors.length === 0 && !input.name.length && !input.types.length > 0}
-              disabled={Object.keys(errors).length > 0}
-              type="submit">
-              Submit
-            </button>
 
-            <Link to="/home">
+              <p>* Required fields</p>
+            <div className="container-button">
               <button
                 className="submit-button"
+                // disabled={!errors.length === 0 && !input.name.length && !input.types.length > 0}
+                disabled={Object.keys(errors).length > 0}
                 type="submit">
-                Cancel
+                Submit
               </button>
-            </Link>
+
+              <Link to="/home">
+                <button
+                  className="submit-button"
+                  type="submit">
+                  Cancel
+                </button>
+              </Link>
+            </div>
           </form>
         </div>
         <div className="container-cards">
@@ -279,7 +280,7 @@ const Create = () => {
             <p className="stats">Height: {input.height}</p>
             <p className="stats">Weight: {input.weight}</p>
             <h2 className="stats"> Type </h2>
-            <div>
+            <div className="container-type">
               {input.types.map((selected) => (
                 <div key={selected}>
                   <p>{selected.toUpperCase()}</p>

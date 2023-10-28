@@ -21,27 +21,29 @@
 .container-cards {
 	border-radius: 10px;
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  padding: 0px;
 }
 
 .container-image {
 	display: flex;
   flex-direction: column;
   border-radius: 10px 0px 0px 10px ;
-  min-height: auto;
-  padding-left: 20px;
+  /* min-height: auto; */
+  /* padding-left: 20px; */
   text-align: center;
   background-color: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(5px);
   
 }
 .container-info {
-	min-width: auto;
-	max-width:  auto;
+	/* min-width: auto; */
+	/* max-width: auto; */
   border-radius: 0px 10px 10px 0px ;
-  margin-right: 50px;
-  padding-left: 50px;
-  padding-right: 10px;
+  padding: 10px 100px 10px 100px;
+  /* margin-right: 50px; */
+  /* padding-left: 50px; */
+  /* padding-right: 10px; */
   background-color: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(5px);
 }
@@ -53,6 +55,12 @@
   backdrop-filter: blur(5px);
 }
 
+.container-type {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
 
 .error {
 	color: red; 
@@ -60,15 +68,23 @@
   text-align-last: left;
  }
 
+ .container-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  justify-content: space-between;
+
+ }
     
   .submit-button {
 	  background-color: #007bff; 
 	  color: white; 
-	  padding: 10px 20px; 
+	  /* padding: 10px 20px;  */
 	  border: none; 
 	  cursor: pointer; 
 	  border-radius: 5px;
-    margin: 30px;
+    /* margin: 30px; */
   }
   
   .delete-button {
@@ -80,10 +96,56 @@
   .submit-button:disabled {
 	  background-color: #ccc; 
 	  cursor: not-allowed; 
-	  padding: 10px 20px;  
+	  /* padding: 10px 20px;   */
     border-radius: 5px;
   }
 
   .submit-button:hover {
     background-color: #005ea7;
+  }
+
+  @media (max-width: 800px) {
+    .container-main {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .container-info {
+      padding: 10px 50px 10px 50px;
+      width: 100%;
+    }
+    .container-form {
+      width: 70%;
+    }
+    
+  }
+    
+  @media (max-width: 600px) {
+    
+    .container-image {
+      /* width: 100%; */
+      border-radius: 10px;
+    }
+    .container-image img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .container-cards {
+      display: flex;
+      flex-wrap: wrap;
+      width: 80%;
+    }
+
+
+    .container-info {
+      align-items: center;
+      /* justify-content: center; */
+      border-radius: 10px;
+      align-items: center;
+      padding: 10px 50px 10px 50px;
+      width: 100%;
+    }
+  
+    
   }
