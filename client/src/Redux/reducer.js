@@ -20,7 +20,7 @@ const initialState = {
   //paginado
   currentPage: 1,
   totalPages: 1,
-  refresh: false,
+  loading: true,
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -37,13 +37,13 @@ const reducer = (state = initialState, { type, payload }) => {
         allPokemons: payload,
         pokemons: payload,
         totalPages: Math.ceil(payload.length / 12),
-        refresh: false,
+        loading: false,
       };
 
     case POST_POKEMON:
       return {
         ...state,
-        refresh: false,
+        loading: false,
       };
 
     case SEARCH_POKEMONS:
@@ -52,7 +52,7 @@ const reducer = (state = initialState, { type, payload }) => {
         pokemons: [payload],
         currentPage: 1,
         totalPages: 1,
-        refresh: false,
+        loading: false,
       };
 
     case ORDER_POKEMONS_BY_NAME:
@@ -88,7 +88,7 @@ const reducer = (state = initialState, { type, payload }) => {
         pokemons: combinedPokemons,
         currentPage: 1,
         totalPages: Math.ceil(combinedPokemons.length / 12),
-        refresh: false,
+        loading: false,
       };
 
     case FILTER_POKEMONS_BY_TYPES:
@@ -103,7 +103,7 @@ const reducer = (state = initialState, { type, payload }) => {
         pokemons: filteredPokemons,
         currentPage: 1,
         totalPages: Math.ceil(filteredPokemons.length / 12),
-        refresh: false,
+        loading: false,
       };
 
     case SET_CURRENT_PAGE:
@@ -130,7 +130,7 @@ const reducer = (state = initialState, { type, payload }) => {
         pokemons: state.allPokemons,
         currentPage: 1,
         totalPages: Math.ceil(state.allPokemons.length / 12),
-        refresh: false,
+        loading: false,
       };
 
     default:
