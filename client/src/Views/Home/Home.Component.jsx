@@ -22,7 +22,7 @@ const Home = () => {
       //   setIsLoading(false); // También desactiva el Loading en caso de error
       //   // console.error(error);
       // });
-  }, [dispatch]);
+  }, [dispatch,isLoading]);
 
   return (
     <div>
