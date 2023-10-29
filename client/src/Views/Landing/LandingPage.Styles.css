@@ -9,7 +9,9 @@ body {
 }
 
 .pokemonLogo {
-  max-width: 30%;
+  width: 40%;
+  padding-top: 20px;
+  padding-bottom: 100px;
 }
 
 .container {
@@ -17,12 +19,14 @@ body {
   justify-content: space-around;
   align-items: center;
   margin-top: 20px;
+  padding-top: 20px;
 }
 
 .pokeBall {
   width: 100px; 
   height: auto; 
   animation: wiggle 2s linear infinite
+
 }
 
 .pokemon-image {
@@ -54,5 +58,22 @@ body {
   }
   40%, 100% {
     transform: rotateZ(0);
+  }
+}
+
+@media (max-width: 800px) {
+  .pokemonLogo {
+    width: 60%;
+  }
+  .pokeBall {
+    padding-top: 50px;
+  }
+  
+  
+}
+
+@media (max-width: 600px) {
+  .pokeBall {
+    padding-top: 50px;
   }
 }
