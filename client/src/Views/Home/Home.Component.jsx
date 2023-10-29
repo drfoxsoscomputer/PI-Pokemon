@@ -44,7 +44,7 @@ const Home = () => {
         </div>
       ) : (
         <div>
-          <h3 className="mensaje-error">No results found. Try adjusting the filters or performing a new search.</h3>
+          <h3 className="mensaje-error">No results found. </h3>
         </div>
       )}
 
