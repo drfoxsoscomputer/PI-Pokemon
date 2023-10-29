@@ -121,7 +121,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         details: [],
-        pokemons: [],
+        // pokemons: [],
       };
 
     case RESET_FILTERS:
