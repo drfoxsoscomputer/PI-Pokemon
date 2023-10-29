@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPokemons, getTypes } from "../../Redux/actions";
+import { getPokemons} from "../../Redux/actions";
 import Cards from "../../Components/Cards/Cards.Component";
 import Pagination from "../../Components/Pagination/Pagination.Component";
 import FiltersBar from "../../Components/FiltersBar/FiltersBar.Component";
@@ -13,15 +13,15 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(getTypes());
+    // dispatch(getTypes());
     dispatch(getPokemons())
-      .then(() => {
+      // .then(() => {
         setIsLoading(false); // Desactiva el Loading cuando se han cargado los datos
-      })
-      .catch((error) => {
-        setIsLoading(false); // También desactiva el Loading en caso de error
-        // console.error(error);
-      });
+      // })
+      // .catch((error) => {
+      //   setIsLoading(false); // También desactiva el Loading en caso de error
+      //   // console.error(error);
+      // });
   }, [dispatch]);
 
   return (
