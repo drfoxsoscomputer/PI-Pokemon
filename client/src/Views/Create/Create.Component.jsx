@@ -106,7 +106,7 @@ const Create = () => {
     <div>
       <div className="container-main">
         <div className="container-form">
-          <h1>CREAT POKÉMON</h1>
+          <h1>CREATE POKÉMON</h1>
           <form onSubmit={(event) => handleSubmit(event)}>
             <div>
               <label>* Name </label>

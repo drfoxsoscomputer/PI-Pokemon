@@ -121,10 +121,11 @@
     
   }
     
-  @media (max-width: 600px) {
+  @media (max-width: 800px) {
     
     .container-image {
-      /* width: 100%; */
+      width: 100%;
+      margin-bottom: 10px;
       border-radius: 10px;
     }
     .container-image img {
@@ -140,7 +141,6 @@
 
     .container-info {
       align-items: center;
-      /* justify-content: center; */
       border-radius: 10px;
       align-items: center;
       padding: 10px 50px 10px 50px;
