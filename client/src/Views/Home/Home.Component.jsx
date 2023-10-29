@@ -11,18 +11,19 @@ const Home = () => {
   const dispatch = useDispatch();
   const { allPokemons, pokemons, currentPage } = useSelector((state) => state);
   const [isLoading, setIsLoading] = useState(true);
+  const loading = useSelector((state) => state.loading);
 
   useEffect(() => {
     // dispatch(getTypes());
     dispatch(getPokemons())
       // .then(() => {
-        setIsLoading(false); // Desactiva el Loading cuando se han cargado los datos
+        // setIsLoading(false); // Desactiva el Loading cuando se han cargado los datos
       // })
       // .catch((error) => {
       //   setIsLoading(false); // También desactiva el Loading en caso de error
       //   // console.error(error);
       // });
-  }, [dispatch,isLoading]);
+  }, [dispatch,loading]);
 
   return (
     <div>
@@ -30,7 +31,7 @@ const Home = () => {
         <FiltersBar />
       </div>
 
-      {isLoading ? (
+      {loading ? (
         <Loading />
       ) : pokemons.length > 0 ? (
         <div>
